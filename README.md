@@ -12,6 +12,9 @@ A template for utilizing the previously mentioned technologies in a simple manne
 
 Vite is frequently used alongside front-end libraries that are single-paged, If a multi-page project is being made, then the file vite.config.js needs to be altered; this way vite will correctly handle the code-splitting and bundle your application for homologation/development:
 
+<details>
+<summary>Example:</summary>
+
 ```sh
 import { resolve } from 'path'
 import { defineConfig } from 'vite'
@@ -27,11 +30,12 @@ export default defineConfig({
     },
 })
 ```
+</details>
 
 ### How to add a Lit component in an HTML page?
 
 <details>
-<summary>Example</summary>
+<summary>Hello world example with reactive update:</summary>
 
 ```sh
 <!DOCTYPE html>
@@ -86,7 +90,7 @@ export default defineConfig({
 
 ### How to make so Tailwind css can be used inside a Lit component?
 
-You should probably avoid this since a web compoente is meant to be isolated from the rest of DOM inside its shadow-DOM, if you don't mind having external CSS inside the component, then:
+You should probably avoid this since a web component is meant to be isolated from the rest of DOM inside its shadow-DOM, if you don't mind having external CSS inside the component, then:
 
 <details>
 <summary>Make all components extend this component:</summary>
@@ -113,6 +117,3 @@ There are other (very bad) alternatives, like adding a style tag inside the comp
 npm i
 npm run dev
 ```
-
-# License
-[MIT](LICENSE)
