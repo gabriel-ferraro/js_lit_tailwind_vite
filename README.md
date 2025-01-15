@@ -1,7 +1,5 @@
 ## JS-Lit-Tailwind CSS-Vite - Template
 
-## Template unfinished
-
 ### What's this?
 A template for utilizing the previously mentioned technologies in a simple manner, presenting short examples on:
 
@@ -12,7 +10,25 @@ A template for utilizing the previously mentioned technologies in a simple manne
 
 ### How to make a multi-page project that is correctly bundled by Vite?
 
-### How to add a Lit component in a HTML page?
+Vite is frequently used alongside front-end libraries that are single-paged, If a multi-page project is being made, then the file vite.config.js needs to be altered; this way vite will correctly handle the code-splitting and bundle your application for homologation/development:
+
+```sh
+import { resolve } from 'path'
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+    build: {
+        rollupOptions: {
+            input: {
+                main: resolve(__dirname, 'index.html'),
+                exampleMultiPage: resolve(__dirname, 'pages/examplePage.html')
+            },
+        },
+    },
+})
+```
+
+### How to add a Lit component in an HTML page?
 
 <details>
 <summary>Example</summary>
@@ -72,14 +88,24 @@ A template for utilizing the previously mentioned technologies in a simple manne
 
 You should probably avoid this since a web compoente is meant to be isolated from the rest of DOM inside its shadow-DOM, if you don't mind having external CSS inside the component, then:
 
-- Option 1:
+<details>
+<summary>Make all components extend this component:</summary>
 
 ```sh
+import { LitElement } from "lit";
 
+/**
+ * Overwrites the default behaviour of encapsulating the component in an isolated shadow DOM by changing createRenderRoot.
+ */
+class LitElementNoShadow extends LitElement {
+    createRenderRoot() {return this}
+}
+
+export default LitElementNoShadow;
 ```
+</details>
 
-- Option 2:
-
+There are other (very bad) alternatives, like adding a style tag inside the component, but this will add overhead in the middle of the component rendering, better to avoid.
 
 ### Running template
 
@@ -89,4 +115,4 @@ npm run dev
 ```
 
 # License
-[to do](LICENSE)
+[MIT](LICENSE)

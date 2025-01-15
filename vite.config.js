@@ -6,8 +6,7 @@ export default defineConfig({
         rollupOptions: {
             input: {
                 main: resolve(__dirname, 'index.html'),
-                exampleMultiPage: resolve(__dirname, 'pages/examplePage.html'),
-                test: resolve(__dirname, 'pages/test.html')
+                exampleMultiPage: resolve(__dirname, 'pages/examplePage.html')
             },
         },
     },
