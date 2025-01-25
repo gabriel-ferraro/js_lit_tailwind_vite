@@ -5,8 +5,8 @@ class MyComponent extends LitElement {
     static properties = {
         // This makes _exclamationMarks a reactive property; 
         // This property triggers the reactive update cycle when changed, re-rendering the component.
-        _exclamationMarks: { state: true }
-    };
+        _exclamationMarks: { type: String }
+    }
 
     constructor() {
         super(); // When a constructor is declared, super cosntructor method must be called.

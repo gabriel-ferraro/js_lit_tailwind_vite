@@ -5,6 +5,11 @@ import { html } from "lit-html";
 
 class SwitchTemeCheckbox extends LitElement {
     static styles = css `
+        .wrapper {
+            padding-right: 11ch;
+            padding-top: 1rem;
+        }
+
         .label {
             margin-left: 60px;
             cursor: pointer;
@@ -61,7 +66,6 @@ class SwitchTemeCheckbox extends LitElement {
             transform: translateX(26px);
         }
 
-        /* Rounded sliders */
         .slider.round {
             border-radius: 34px;
         }
@@ -75,11 +79,13 @@ class SwitchTemeCheckbox extends LitElement {
 
     render() {
         return html `
-            <label @change="${this.changeTheme}" class="switch">
-                <input type="checkbox">
-                <span class="slider round"></span>
-                <span class="label">Dark Mode</span>
-            </label>
+            <div class="wrapper">
+                <label @change="${this.changeTheme}" class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                    <span class="label">Dark Mode</span>
+                </label>
+            </div>
         `;
     }
 }

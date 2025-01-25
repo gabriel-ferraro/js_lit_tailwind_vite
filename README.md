@@ -1,5 +1,11 @@
 ## JS-Lit-Tailwind CSS-Vite - Template
 
+If you don't want the examples, ignore this template and run the following, getting quick template options not only for Vite but also for other frameworks:
+
+```sh
+npm create vite@latest
+```
+
 ### What's this?
 A template for utilizing the previously mentioned technologies in a simple manner, presenting short examples on:
 
@@ -10,7 +16,7 @@ A template for utilizing the previously mentioned technologies in a simple manne
 
 ### How to make a multi-page project that is correctly bundled by Vite?
 
-Vite is frequently used alongside front-end libraries that are single-paged, If a multi-page project is being made, then the file vite.config.js needs to be altered; this way vite will correctly handle the code-splitting and bundle your application for homologation/development:
+Vite is frequently used alongside front-end libraries that are single-paged, If a multi-page project is being made, then the file vite.config.js needs to be altered; this way Vite will correctly handle the code-splitting and bundle your application for homologation/development:
 
 <details>
 <summary>Example:</summary>
@@ -59,7 +65,7 @@ export default defineConfig({
                 // This makes _exclamationMarks a reactive property; 
                 // This property triggers the reactive update cycle when changed, re-rendering the component.
                 _exclamationMarks: { state: true }
-            };
+            }
 
             constructor() {
                 super(); // When a constructor is declared, super cosntructor method must be called.
