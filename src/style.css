@@ -1,3 +1,8 @@
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --shadow-focused-enabled: 0 0 15px blue;
+    --shadow-focused: 0 0 15px red;
+}

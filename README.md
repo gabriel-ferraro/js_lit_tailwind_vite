@@ -9,17 +9,17 @@ npm create vite@latest
 ### What's this?
 A template for utilizing the previously mentioned technologies in a simple manner, presenting short examples on:
 
-- Making a multi-page Vite build.
+- Making a static front-end only multi-page Vite build.
 - Integrating a Lit generated web-component in HTML.
 - Tailwind CSS available outside and inside Lit web-components.
 - A production and development build with the mentioned features working together.
 
-### How to make a multi-page project that is correctly bundled by Vite?
+### How to make a static multi-page project that is correctly bundled by Vite?
 
-Vite is frequently used alongside front-end libraries that are single-paged, If a multi-page project is being made, then the file vite.config.js needs to be altered; this way Vite will correctly handle the code-splitting and bundle your application for homologation/development:
+If there is no server to handle the routing and only front-end is needed, routes can be statically set like in the example below; this way Vite will correctly handle the code-splitting and bundle your application for homologation/development:
 
 <details>
-<summary>Example:</summary>
+<summary>Example vite.config.js:</summary>
 
 ```sh
 import { resolve } from 'path'
@@ -57,15 +57,24 @@ export default defineConfig({
     <my-component></my-component>
 
     <script type="module">
-        import { LitElement } from "lit";
+        import { LitElement, css } from "lit";
         import { html } from "lit-html";
 
         class MyComponent extends LitElement {
             static properties = {
                 // This makes _exclamationMarks a reactive property; 
                 // This property triggers the reactive update cycle when changed, re-rendering the component.
-                _exclamationMarks: { state: true }
+                _exclamationMarks: { type: String }
             }
+
+            // Set component CSS (This styles are component exclusive and exterior styles won't pollute the component).
+            static styles = css `
+                .my-button {
+                    font-size: 2rem;
+                    cursor: pointer;
+                    margin-bottom: 1rem;
+                }
+            `;
 
             constructor() {
                 super(); // When a constructor is declared, super cosntructor method must be called.
@@ -80,26 +89,27 @@ export default defineConfig({
             }
 
             render() {
-                return html`
+                return html `
                     <h1>Hello ${this.getAttribute("phrase") ?? "something"} ${this._exclamationMarks}</h1>
-                    <button style="font-size: 30px; cursor: pointer; margin-bottom: 30px" @click="${this.addExclamationMark}">Click me!</button>`;
-                }
+                    <button class="my-button" @click="${this.addExclamationMark}">Click me!</button>
+                `;
             }
+        }
 
-            customElements.define("my-component", MyComponent);
-        </script>
+        customElements.define("my-component", MyComponent);    
+    </script>
 </body>
 
 </html>
 ```
 </details>
 
-### How to make so Tailwind css can be used inside a Lit component?
+### How to add exterior CSS in Lit components?
 
-You should probably avoid this since a web component is meant to be isolated from the rest of DOM inside its shadow-DOM, if you don't mind having external CSS inside the component, then:
+If possible avoid this since a web component is meant to be isolated from the rest of DOM inside its shadow-DOM, but if you don't mind and wish to have external CSS inside the component, then:
 
 <details>
-<summary>Make all components extend this component:</summary>
+<summary>Make components extend this component:</summary>
 
 ```sh
 import { LitElement } from "lit";
@@ -122,4 +132,6 @@ There are other (very bad) alternatives, like adding a style tag inside the comp
 ```sh
 npm i
 npm run dev
+
+Alternatively use: npm run dev|build|preview
 ```

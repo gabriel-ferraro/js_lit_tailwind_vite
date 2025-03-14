@@ -1,4 +1,4 @@
-import { LitElement } from "lit";
+import { LitElement, css } from "lit";
 import { html } from "lit-html";
 
 class MyComponent extends LitElement {
@@ -7,6 +7,15 @@ class MyComponent extends LitElement {
         // This property triggers the reactive update cycle when changed, re-rendering the component.
         _exclamationMarks: { type: String }
     }
+
+    // Set component CSS (This styles are component exclusive and exterior styles won't pollute the component).
+    static styles = css `
+        .my-button {
+            font-size: 2rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+    `;
 
     constructor() {
         super(); // When a constructor is declared, super cosntructor method must be called.
@@ -21,9 +30,9 @@ class MyComponent extends LitElement {
     }
 
     render() {
-        return html`
+        return html `
             <h1>Hello ${this.getAttribute("phrase") ?? "something"} ${this._exclamationMarks}</h1>
-            <button style="font-size: 30px; cursor: pointer; margin-bottom: 30px" @click="${this.addExclamationMark}">Click me!</button>
+            <button class="my-button" @click="${this.addExclamationMark}">Click me!</button>
         `;
     }
 }
